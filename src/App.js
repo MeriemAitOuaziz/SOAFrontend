@@ -4,6 +4,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import MissionTable from './Components/MissionTable';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -54,7 +55,7 @@ export default function App() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        Missions
+        <MissionTable/>
       </TabPanel>
       <TabPanel value={value} index={1}>
         Remboursements
