@@ -21,6 +21,7 @@ import {
 import { fetchMissions, fetchMissionsByDemandeur } from "./Api/Mission";
 import { Stack } from "@mui/system";      
 import NewMissionModel from "./Components/NewMissionModel";
+import { fetchRemboursements, fetchRemboursementsByDemandeur } from './Api/Remboursement';
 
 
 function TabPanel(props) {
@@ -58,14 +59,19 @@ function a11yProps(index) {
 
 export default function App() {
   const [value, setValue] = React.useState(0);
+  const [remboursements, setRemboursements] = useState([]);
+  const [remboursementsByDemandeur, setRemboursementsByDemandeurs] = useState([]);
   const [open, setOpen] = React.useState(false);
   const [demandeur, setDemandeur] = useState("");
   const [missions, setMissions] = useState([]);
+  const [requester, setRequester] = useState("");
   const [missionsByDemandeur, setMissionsByDemandeur] = useState([]);
+  const [all, setAll]=useState(true);
   const [showModal, setshowModal] = useState(false);
   useEffect(() => {
     fetchMissions(setMissions);
-  }, []);
+    fetchRemboursements(setRemboursements) 
+  }, [missions,remboursements]);
  const handleCloseMissionModal =()=>{
   setshowModal(false);
  }
@@ -81,6 +87,12 @@ export default function App() {
   const handleClose = () => {
     setOpen(false);
   };
+  const onChange = (e) => {
+    setRequester(e.target.value);
+  };
+  const onSubmit= () => {
+    fetchRemboursementsByDemandeur(setRemboursements,requester);
+  }
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -139,6 +151,11 @@ export default function App() {
           <Typography variant="h4" fontWeight="bold" sx={{ mb: "5px" }}>
             Remboursements
           </Typography>
+          <form
+            
+          >
+            <Stack spacing={2}>
+             
           <TextField
             margin="10px"
             id="outlined-basic"
@@ -146,10 +163,15 @@ export default function App() {
             variant="outlined"
             size="small"
             style = {{width: 500}}
+            value={requester}
+            name="requester"
+            onChange={onChange}
           />
-          <IconButton aria-label="delete" size="small">
+          <IconButton aria-label="delete" size="small" onClick={()=>{fetchRemboursementsByDemandeur(setRemboursements,requester)}} >
             <SearchIcon fontSize="inherit" />
           </IconButton>
+          </Stack>
+          </form>
 
           <Button
             variant="contained"
@@ -174,7 +196,7 @@ export default function App() {
           
         </Box>
 
-        <RemboursementTable />
+        <RemboursementTable remboursements={remboursements}/>
       </TabPanel>
 
       <NewMissionModel open={showModal} handleClose={handleCloseMissionModal}/>
