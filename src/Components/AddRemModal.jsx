@@ -6,12 +6,35 @@ import ModalDialog from '@mui/joy/ModalDialog';
 import Stack from '@mui/joy/Stack';
 import Add from '@mui/icons-material/Add';
 import Typography from '@mui/joy/Typography';
+import { createRemboursement } from '../Api/Remboursement';
 
 import { useState, useEffect, } from "react";
 
 export default function BasicModalDialog(props) {
  // const [open, setOpen] = React.useState(false);
-  const {open} = props;
+ const [formData, setFormData] = React.useState({
+    demandeur : '',
+    frais: 0,
+    budgetAtt: 0 
+ })
+ const {demandeur, frais, budgetAtt} = formData;
+ const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }))
+   }
+
+   const onSubmit = (e) => {
+    e.preventDefault()
+    createRemboursement(demandeur,frais,budgetAtt);
+    onClose();
+  
+    }
+  
+
+
+  const {open, onClose} = props;
   useEffect(() => {
     if (!open) {
     }
@@ -36,7 +59,7 @@ export default function BasicModalDialog(props) {
             fontSize="1.25em"
             mb="0.25em"
           >
-            Create new project
+            Remboursements
           </Typography>
           <Typography
             id="basic-modal-dialog-description"
@@ -44,16 +67,15 @@ export default function BasicModalDialog(props) {
             mb={2}
             textColor="text.tertiary"
           >
-            Fill in the information of the project.
+            Ajouter une demande de remboursement
           </Typography>
           <form
-            onSubmit={(event) => {
-             
-            }}
+            onSubmit={onSubmit}
           >
             <Stack spacing={2}>
-              <TextField label="Name" autoFocus required />
-              <TextField label="Description" required />
+              <TextField label="Demandeur" type="text" name="demandeur" value={demandeur} placeholder="Demandeur" onChange={onChange} autoFocus required />
+              <TextField label="Frais" type="text" value={frais} name="frais" placeholder="Frais" onChange={onChange} required />
+              <TextField label="Budget Attribué" type="text" value={budgetAtt} name="budgetAtt" placeholder="Budget Attribué" onChange={onChange} required />
               <Button type="submit">Submit</Button>
             </Stack>
           </form>

@@ -169,6 +169,7 @@ export default function App() {
           />*/}
           <BasicModalDialog
           open={open}
+          onClose={handleClose}
           />
           
         </Box>
