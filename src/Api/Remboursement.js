@@ -20,7 +20,10 @@ const fetchRemboursements = (setRemboursements) => {
 };
 
 //fetches Remboursements by demandeur
-const fetchRemboursementsByDemandeur = (setRemboursementsByDemandeur, demandeur) => {
+const fetchRemboursementsByDemandeur = (
+  setRemboursementsByDemandeur,
+  demandeur
+) => {
   axios.get(`${Remboursement_Api_Url_S1}` + "/" + `${demandeur}`).then(
     (res) => {
       console.log(res.data);

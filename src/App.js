@@ -1,15 +1,26 @@
-import * as React from "react";
-import PropTypes from "prop-types";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import MissionTable from "./Components/MissionTable";
+import * as React from 'react';
+import PropTypes from 'prop-types';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import MissionTable from './Components/MissionTable';
 import RemboursementTable from "./Components/RemboursementTable";
 import { Button, TextField, IconButton } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import AddRemboursementModal from "./Components/AddRemboursementModal";
 import BasicModalDialog from "./Components/AddRemModal";
+import {
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@mui/material";
+import { fetchMissions, fetchMissionsByDemandeur } from "./Api/Mission";
+import { Stack } from "@mui/system";      
+import NewMissionModel from "./Components/NewMissionModel";
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -47,10 +58,25 @@ function a11yProps(index) {
 export default function App() {
   const [value, setValue] = React.useState(0);
   const [open, setOpen] = React.useState(false);
-
+  const [demandeur, setDemandeur] = useState("");
+  const [missions, setMissions] = useState([]);
+  const [missionsByDemandeur, setMissionsByDemandeur] = useState([]);
+  const [showModal, setshowModal] = useState(false);
+  useEffect(() => {
+    fetchMissions(setMissions);
+  }, [missions]);
+ const handleClose =()=>{
+  setshowModal(false);
+ }
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  const handleChangeDemandeur = (e) => {
+    setDemandeur(e.target.value);
+  };
+  const handleSubmit=()=>{
+    fetchMissionsByDemandeur(setMissions, demandeur);
+  }
   const handleClose = () => {
     setOpen(false);
   };
@@ -68,7 +94,38 @@ export default function App() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <MissionTable />
+        <Typography mb={2} variant="h3" component="h2" align="center">
+          Missions
+        </Typography>
+        <Stack direction="row" spacing={2}>
+          <form onSubmit={handleSubmit} style={{width:"100%"}}>
+          <Stack direction="row" spacing={2}>
+          <FormControl fullWidth>
+            <InputLabel id="demandeur">Demandeur</InputLabel>
+            <Select
+              labelId="demandeur"
+              id="demandeur-select"
+              value={demandeur}
+              label="Demandeur"
+              defaultValue=""
+              name="demandeur"
+              onChange={handleChangeDemandeur}
+            >
+              {missions.map((mission) => (
+                <MenuItem value={mission.id} key={mission.id}>
+                  {mission.demandeur}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <Button variant="outlined" type="submit" >Rechercher</Button>
+          </Stack>
+          </form>
+          <Button variant="outlined" onClick={()=>{
+            setshowModal(true);
+          }}>Demande de mission</Button>
+        </Stack>
+        <MissionTable missions={missions} />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <Box
@@ -118,6 +175,9 @@ export default function App() {
 
         <RemboursementTable />
       </TabPanel>
+
+      <NewMissionModel open={showModal} handleClose={handleClose}/>
     </Box>
   );
 }
+
