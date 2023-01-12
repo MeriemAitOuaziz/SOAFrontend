@@ -49,12 +49,12 @@ export default function RemboursementTable(props) {
   const { remboursements } = props;
 
   const columns = [
-    { field: "id", headerName: "Remboursement ID", width: 150 },
-    { field: "demandeur", headerName: "Demandeur", width: 150 },
+    { field: "id", headerName: "Remboursement ID",flex: 1},
+    { field: "demandeur", headerName: "Demandeur", flex: 1, },
     {
       field: "ordre",
       headerName: "Ordre",
-      width: 250,
+      flex: 1,
       renderCell: ({ row: { ordre, id } }) => {
         return (
           <Box
@@ -83,16 +83,16 @@ export default function RemboursementTable(props) {
         );
       },
     },
-    { field: "budgetAttrib", headerName: "Budget Attribué", width: 200 },
+    { field: "budgetAttrib", headerName: "Budget Attribué", flex: 1, },
     {
       field: "remboursementAttrib",
       headerName: "Remboursement Attribué",
-      width: 200,
+      flex: 1,
     },
     {
       field: "isValid",
       headerName: "Validation",
-      width: 230,
+      flex: 1,
       renderCell: ({ row: { isValid, id } }) => {
         return (
           <Box
@@ -124,7 +124,7 @@ export default function RemboursementTable(props) {
     {
       field: "validPrice",
       headerName: "Validation du prix",
-      width: 300,
+      flex: 1,
       renderCell: ({ row: { validPrice, isValid, id, demandeur } }) => {
         return (
           <Box

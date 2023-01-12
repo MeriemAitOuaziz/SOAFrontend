@@ -154,7 +154,7 @@ export default function App() {
           <form
             
           >
-            <Stack spacing={2}>
+            <Stack direction="row" spacing={2}>
              
           <TextField
             margin="10px"
@@ -162,8 +162,8 @@ export default function App() {
             label="Chercher Remboursements par demandeur"
             variant="outlined"
             size="small"
-            style = {{width: 500}}
             value={requester}
+            fullWidth
             name="requester"
             onChange={onChange}
           />
