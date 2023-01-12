@@ -1,11 +1,15 @@
-import * as React from "react";
-import { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import MissionTable from "./Components/MissionTable";
+import * as React from 'react';
+import PropTypes from 'prop-types';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import MissionTable from './Components/MissionTable';
+import RemboursementTable from "./Components/RemboursementTable";
+import { Button, TextField, IconButton } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import AddRemboursementModal from "./Components/AddRemboursementModal";
+import BasicModalDialog from "./Components/AddRemModal";
 import {
   Button,
   FormControl,
@@ -16,6 +20,7 @@ import {
 import { fetchMissions, fetchMissionsByDemandeur } from "./Api/Mission";
 import { Stack } from "@mui/system";      
 import NewMissionModel from "./Components/NewMissionModel";
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -52,6 +57,7 @@ function a11yProps(index) {
 
 export default function App() {
   const [value, setValue] = React.useState(0);
+  const [open, setOpen] = React.useState(false);
   const [demandeur, setDemandeur] = useState("");
   const [missions, setMissions] = useState([]);
   const [missionsByDemandeur, setMissionsByDemandeur] = useState([]);
@@ -71,6 +77,9 @@ export default function App() {
   const handleSubmit=()=>{
     fetchMissionsByDemandeur(setMissions, demandeur);
   }
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -119,10 +128,55 @@ export default function App() {
         <MissionTable missions={missions} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Remboursements
+        <Box
+          display="flex"
+          flexDirection="row"
+          justifyContent="space-between"
+          alignItems="center"
+          width="100%"
+        >
+          <Typography variant="h4" fontWeight="bold" sx={{ mb: "5px" }}>
+            Remboursements
+          </Typography>
+          <TextField
+            margin="10px"
+            id="outlined-basic"
+            label="Chercher Remboursements par demandeur"
+            variant="outlined"
+            size="small"
+            style = {{width: 500}}
+          />
+          <IconButton aria-label="delete" size="small">
+            <SearchIcon fontSize="inherit" />
+          </IconButton>
+
+          <Button
+            variant="contained"
+            sx={{ m: "10px", backgroundColor: "#70d8bd" }}
+            onClick={() => {
+              setOpen(true);
+            }}
+          >
+            <Typography variant="h7">Ajouter Remboursement</Typography>
+          </Button>
+         {/*} <AddRemboursementModal
+              id="ringtone-menu"
+              keepMounted
+              open={open}
+              onClose={handleClose}
+              value="Dione"
+          />*/}
+          <BasicModalDialog
+          open={open}
+          />
+          
+        </Box>
+
+        <RemboursementTable />
       </TabPanel>
 
       <NewMissionModel open={showModal} handleClose={handleClose}/>
     </Box>
   );
 }
+
