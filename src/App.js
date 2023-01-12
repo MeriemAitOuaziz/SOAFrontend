@@ -70,7 +70,7 @@ export default function App() {
   const [showModal, setshowModal] = useState(false);
   useEffect(() => {
     fetchMissions(setMissions);
-    fetchRemboursements(setRemboursements);
+    fetchRemboursements(setRemboursements) 
   }, [missions,remboursements]);
  const handleCloseMissionModal =()=>{
   setshowModal(false);
@@ -152,7 +152,7 @@ export default function App() {
             Remboursements
           </Typography>
           <form
-            onSubmit={onSubmit}
+            
           >
             <Stack spacing={2}>
              
@@ -167,7 +167,7 @@ export default function App() {
             name="requester"
             onChange={onChange}
           />
-          <IconButton type="submit" aria-label="delete" size="small" onClick={()=>{setAll(false)}} >
+          <IconButton aria-label="delete" size="small" onClick={()=>{fetchRemboursementsByDemandeur(setRemboursements,requester)}} >
             <SearchIcon fontSize="inherit" />
           </IconButton>
           </Stack>

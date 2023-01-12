@@ -101,7 +101,7 @@ export default function RemboursementTable(props) {
             justifyContent="center"
             borderRadius="4px"
           >
-            {isValid ? (
+            {isValid === 1 ? (
               <Button variant="contained" color="success" disabled fullWidth>
                 Validé
               </Button>
@@ -128,11 +128,11 @@ export default function RemboursementTable(props) {
             justifyContent="center"
             borderRadius="4px"
           >
-            {validPrice ? (
+            {validPrice===1 ? (
               <Button variant="contained" color="success" disabled fullWidth>
                 Validé
               </Button>
-            ) : (isValid ? (<>
+            ) : (isValid===1 ? (<>
               <Button variant="contained" sx={{ backgroundColor: "#70d8bd" }} onClick={() => {
                 setOpen2(true);
               }} fullWidth>
