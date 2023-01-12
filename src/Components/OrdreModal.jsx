@@ -17,22 +17,21 @@ import { changeOrdre, createMission } from "../Api/Mission";
 //   },
 // };
 
-function BasicModal({ handleClose, open }) {
+function BasicModal({ handleClose, open,id }) {
 
   const [formValues, setFormValues] = useState({ ordre:""});
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormValues((current) => {
+    setFormValues(() => {
       return {
-        ...current,
-        // 👇️ override value for nested country property
         [name]: value,
       };
     });
+    console.log(formValues);
   };
   const handleSubmit = () => {
     //api call
-    changeOrdre(formValues.ordre);
+    changeOrdre(id,formValues.ordre);
   };
 
   return (

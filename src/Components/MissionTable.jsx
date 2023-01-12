@@ -43,7 +43,7 @@ export default function MissionTable({ missions }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {missions.map((row) => (
             <TableRow
               key={row.id}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -65,6 +65,7 @@ export default function MissionTable({ missions }) {
                   >
                     Modifer
                   </Button>
+                  <OrdreModal open={showModal} handleClose={handleClose} id={row.id}/>
                 </Stack>
               </TableCell>
               <TableCell align="center">
@@ -91,7 +92,7 @@ export default function MissionTable({ missions }) {
           ))}
         </TableBody>
       </Table>
-      <OrdreModal open={showModal} handleClose={handleClose} />
+ 
     </TableContainer>
   );
 }
