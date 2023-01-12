@@ -69,18 +69,22 @@ export default function MissionTable({ missions }) {
                 </Stack>
               </TableCell>
               <TableCell align="center">
-                {row.isValid ? "Validé" : "Non validé"}
+                {(row.isValid == 1 )? "Validé" : "Non validé"}
               </TableCell>
               <TableCell align="center">
                 {!row.isValid && (
+                  
                   <Button
+                 
                     variant="contained"
                     onClick={() => {
                       validateMission(row.id);
                     }}
                   >
+                    
                     Valider
                   </Button>
+                  
                 )}
                 {row.isValid && (
                   <Button disabled variant="contained">

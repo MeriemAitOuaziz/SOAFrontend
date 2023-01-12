@@ -113,13 +113,13 @@ export default function App() {
               onChange={handleChangeDemandeur}
             >
               {missions.map((mission) => (
-                <MenuItem value={mission.id} key={mission.id}>
+                <MenuItem value={mission.demandeur} key={mission.id}>
                   {mission.demandeur}
                 </MenuItem>
               ))}
             </Select>
           </FormControl>
-          <Button variant="outlined" type="submit" >Rechercher</Button>
+          <Button variant="outlined" onClick={handleSubmit} >Rechercher</Button>
           </Stack>
           </form>
           <Button variant="outlined" onClick={()=>{

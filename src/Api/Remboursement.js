@@ -37,7 +37,7 @@ const fetchRemboursementsByDemandeur = (
 
 //compute remboursement
 const computeRemboursement = (id) => {
-  axios.put(`${Remboursement_Api_Url_S4}` + "/compute/" + `${id}`).then(
+  axios.get(`${Remboursement_Api_Url_S4}` + "/compute/" + `${id}`).then(
     (res) => {
       console.log(res.data);
     },
@@ -50,7 +50,7 @@ const computeRemboursement = (id) => {
 //creates a Remboursement demande
 const createRemboursement = (demandeur, frais, budgetAttrib) => {
   axios
-    .put(
+    .get(
       `${Remboursement_Api_Url_S2}` +
         "/" +
         `${demandeur}` +
@@ -71,7 +71,7 @@ const createRemboursement = (demandeur, frais, budgetAttrib) => {
 
 //Changes Remboursement isValid to true
 const validateRemboursement = (id) => {
-  axios.put(`${Remboursement_Api_Url_S3}` + "/" + `${id}`).then(
+  axios.get(`${Remboursement_Api_Url_S3}` + "/" + `${id}`).then(
     (res) => {
       console.log(res.data);
     },
@@ -83,7 +83,7 @@ const validateRemboursement = (id) => {
 
 //Changes Remboursement isValid to true
 const validateRemboursementPrice = (id) => {
-  axios.put(`${Remboursement_Api_Url_S3}` + "/frais/" + `${id}`).then(
+  axios.get(`${Remboursement_Api_Url_S3}` + "/frais/" + `${id}`).then(
     (res) => {
       console.log(res.data);
     },
@@ -96,7 +96,7 @@ const validateRemboursementPrice = (id) => {
 //changes ordre of Remboursement
 const changeOrdre = (id, ordre) => {
   axios
-    .put(`${Remboursement_Api_Url_S3}` + "/" + `${id}` + "/" + `${ordre}`)
+    .get(`${Remboursement_Api_Url_S3}` + "/" + `${id}` + "/" + `${ordre}`)
     .then(
       (res) => {
         console.log(res.data);

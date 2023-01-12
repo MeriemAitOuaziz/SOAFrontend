@@ -20,7 +20,7 @@ const fetchMissions = (setMissions) => {
 
 //fetches missions by demandeur
 const fetchMissionsByDemandeur = (setMissionsByDemandeur, demandeur) => {
-  axios.get(`${Mission_Api_Url_S1}` + "/" + `${demandeur}`).then(
+  axios.get(`${Mission_Api_Url_S2}` + "/" + `${demandeur}`).then(
     (res) => {
       console.log(res.data);
       setMissionsByDemandeur(res.data);
@@ -34,7 +34,7 @@ const fetchMissionsByDemandeur = (setMissionsByDemandeur, demandeur) => {
 //creates a mission
 const createMission = (demandeur, contenu) => {
   axios
-    .put(`${Mission_Api_Url_S2}` + "/" + `${demandeur}` + "/" + `${contenu}`)
+    .get(`${Mission_Api_Url_S2}` + "/" + `${demandeur}` + "/" + `${contenu}`)
     .then(
       (res) => {
         console.log(res.data);
@@ -47,7 +47,7 @@ const createMission = (demandeur, contenu) => {
 
 //Changes mission isValid to true
 const validateMission = (id) => {
-  axios.put(`${Mission_Api_Url_S3}` + "/" + `${id}`).then(
+  axios.get(`${Mission_Api_Url_S3}` + "/" + `${id}`).then(
     (res) => {
       console.log(res.data);
     },
