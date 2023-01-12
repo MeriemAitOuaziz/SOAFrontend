@@ -65,7 +65,7 @@ export default function App() {
   const [showModal, setshowModal] = useState(false);
   useEffect(() => {
     fetchMissions(setMissions);
-  }, [missions]);
+  }, []);
  const handleCloseMissionModal =()=>{
   setshowModal(false);
  }

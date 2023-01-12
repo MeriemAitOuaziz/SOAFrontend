@@ -59,7 +59,7 @@ const validateMission = (id) => {
 
 //changes ordre of mission
 const changeOrdre = (id, ordre) => {
-  axios.put(`${Mission_Api_Url_S3}` + "/" + `${id}` + "/" + `${ordre}`).then(
+  axios.get(`${Mission_Api_Url_S3}` + "/" + `${id}` + "/" + `${ordre}`).then(
     (res) => {
       console.log(res.data);
     },
