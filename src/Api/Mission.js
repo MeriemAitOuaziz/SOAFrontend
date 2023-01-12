@@ -18,11 +18,11 @@ const fetchMissions = (setMissions) => {
 };
 
 //fetches missions by demandeur
-const fetchMissionsByDemandeur = (setMissions, demandeur) => {
+const fetchMissionsByDemandeur = (setMissionsByDemandeur, demandeur) => {
   axios.get(`${Mission_Api_Url_S1}` + "/" + `${demandeur}`).then(
     (res) => {
       console.log(res.data);
-      setMissions(res.data);
+      setMissionsByDemandeur(res.data);
     },
     (err) => {
       console.error("error in getting Missions by demandeur");
