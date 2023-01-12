@@ -71,7 +71,7 @@ export default function App() {
   useEffect(() => {
     fetchMissions(setMissions);
     fetchRemboursements(setRemboursements) 
-  }, [missions,remboursements]);
+  }, []);
  const handleCloseMissionModal =()=>{
   setshowModal(false);
  }

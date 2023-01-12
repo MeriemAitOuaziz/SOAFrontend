@@ -1,8 +1,8 @@
 import { DataGrid } from "@mui/x-data-grid";
 import { Box, Typography, useTheme, Button } from "@mui/material";
 import { fetchRemboursements } from "../Api/Remboursement";
-import * as React from 'react';
-import {  useEffect, } from "react";
+import * as React from "react";
+import { useEffect } from "react";
 import { validateRemboursement } from "../Api/Remboursement";
 import { validateRemboursementPrice } from "../Api/Remboursement";
 import OrderModalDialog from "./ChangeOrdreRem";
@@ -16,7 +16,7 @@ const rows = [
     budgetAttrib: 900,
     remboursementAttrib: 800,
     isValid: true,
-    validPrice: false
+    validPrice: false,
   },
   {
     id: 2,
@@ -26,12 +26,9 @@ const rows = [
     budgetAttrib: 900,
     remboursementAttrib: 800,
     isValid: false,
-    validPrice: false
+    validPrice: false,
   },
 ];
-
-
-
 
 export default function RemboursementTable(props) {
   const [open, setOpen] = React.useState(false);
@@ -42,45 +39,50 @@ export default function RemboursementTable(props) {
   const handleClose2 = () => {
     setOpen2(false);
   };
-//  const [remboursements, setRemboursements] = React.useState([]);
-//  const [remboursementsPerUser , setRemboursementsPerUser]=React.useState([]);
-//  useEffect(() => {
-//    all ?
-//      fetchRemboursements(setRemboursements)
-//      : ;
-//  }, []);
-  const {remboursements} = props;
+  //  const [remboursements, setRemboursements] = React.useState([]);
+  //  const [remboursementsPerUser , setRemboursementsPerUser]=React.useState([]);
+  //  useEffect(() => {
+  //    all ?
+  //      fetchRemboursements(setRemboursements)
+  //      : ;
+  //  }, []);
+  const { remboursements } = props;
 
   const columns = [
     { field: "id", headerName: "Remboursement ID", width: 150 },
     { field: "demandeur", headerName: "Demandeur", width: 150 },
-    { field: "ordre", headerName: "Ordre", width: 250, renderCell: ({ row: { ordre,id} }) => {
-      return (
-        <Box
-          width="60%"
-          m="0 auto"
-          p="5px"
-          display="flex"
-          justifyContent="center"
-          justifyItems="center"
-          borderRadius="4px"
-          flexDirection="row"
-        >
-          <Typography m="20px">{ordre}</Typography>
-            <Button variant="outlined" size="small" fullWidth onClick={() => {
-              setOpen(true);
-            }}>
+    {
+      field: "ordre",
+      headerName: "Ordre",
+      width: 250,
+      renderCell: ({ row: { ordre, id } }) => {
+        return (
+          <Box
+            width="60%"
+            m="0 auto"
+            p="5px"
+            display="flex"
+            justifyContent="center"
+            justifyItems="center"
+            borderRadius="4px"
+            flexDirection="row"
+          >
+            <Typography m="20px">{ordre}</Typography>
+            <Button
+              variant="outlined"
+              size="small"
+              fullWidth
+              onClick={() => {
+                setOpen(true);
+              }}
+            >
               Modifier
             </Button>
-            <OrderModalDialog 
-            open={open}
-            handleClose={handleClose}
-            id={id}
-            />
-         
-        </Box>
-      );
-    }, },
+            <OrderModalDialog open={open} handleClose={handleClose} id={id} />
+          </Box>
+        );
+      },
+    },
     { field: "budgetAttrib", headerName: "Budget Attribué", width: 200 },
     {
       field: "remboursementAttrib",
@@ -101,12 +103,17 @@ export default function RemboursementTable(props) {
             justifyContent="center"
             borderRadius="4px"
           >
-            {isValid === 1 ? (
+            {isValid == 1 ? (
               <Button variant="contained" color="success" disabled fullWidth>
                 Validé
               </Button>
             ) : (
-              <Button variant="contained" sx={{ backgroundColor: "#70d8bd" }} onClick={()=>validateRemboursement(id)} fullWidth>
+              <Button
+                variant="contained"
+                sx={{ backgroundColor: "#70d8bd" }}
+                onClick={() => validateRemboursement(id)}
+                fullWidth
+              >
                 Valider
               </Button>
             )}
@@ -118,7 +125,7 @@ export default function RemboursementTable(props) {
       field: "validPrice",
       headerName: "Validation du prix",
       width: 300,
-      renderCell: ({ row: { validPrice , isValid,id,demandeur} }) => {
+      renderCell: ({ row: { validPrice, isValid, id, demandeur } }) => {
         return (
           <Box
             width="60%"
@@ -128,37 +135,37 @@ export default function RemboursementTable(props) {
             justifyContent="center"
             borderRadius="4px"
           >
-            {validPrice===1 ? (
+            {validPrice == 1 ? (
               <Button variant="contained" color="success" disabled fullWidth>
                 Validé
               </Button>
-            ) : (isValid===1 ? (<>
-              <Button variant="contained" sx={{ backgroundColor: "#70d8bd" }} onClick={() => {
-                setOpen2(true);
-              }} fullWidth>
-                Valider
-              </Button> 
-              <PriceModalDialog 
-            open2={open2}
-            handleClose2={handleClose2}
-            id={id}
-            demandeur={demandeur}
-            
-            /></>): <Typography>Request not Approved yet</Typography>
+            ) : isValid == 1 ? (
+              <>
+                <Button
+                  variant="contained"
+                  sx={{ backgroundColor: "#70d8bd" }}
+                  onClick={() => {
+                    setOpen2(true);
+                  }}
+                  fullWidth
+                >
+                  Valider
+                </Button>
+                <PriceModalDialog
+                  open2={open2}
+                  handleClose2={handleClose2}
+                  id={id}
+                  demandeur={demandeur}
+                />
+              </>
+            ) : (
+              <Typography>Request not Approved yet</Typography>
             )}
           </Box>
         );
       },
     },
   ];
-
-
-
-
-
-
-
-
 
   return (
     <div style={{ height: 300, width: "100%" }}>

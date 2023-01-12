@@ -76,7 +76,7 @@ export default function BasicModalDialog(props) {
               <TextField label="Demandeur" type="text" name="demandeur" value={demandeur} placeholder="Demandeur" onChange={onChange} autoFocus required />
               <TextField label="Frais" type="text" value={frais} name="frais" placeholder="Frais" onChange={onChange} required />
               <TextField label="Budget Attribué" type="text" value={budgetAtt} name="budgetAtt" placeholder="Budget Attribué" onChange={onChange} required />
-              <Button type="submit">Submit</Button>
+              <Button onClick={onSubmit}>Submit</Button>
             </Stack>
           </form>
         </ModalDialog>

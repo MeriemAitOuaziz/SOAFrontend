@@ -32,7 +32,8 @@ export default function PriceModalDialog(props) {
   useEffect(() => {
     computeRemboursement(id);
     fetchRemboursementsByDemandeur(setDemandesPerUser,demandeur);
-    demandesPerUser.filter(demande=>demande.id===id).forEach(demande=>setActualDemande(demande));
+    demandesPerUser.filter(demande=>demande.id==id).forEach(demande=>setActualDemande(demande));
+    
 
     if (!open2) {
     }
