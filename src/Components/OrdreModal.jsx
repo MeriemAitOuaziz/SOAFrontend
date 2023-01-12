@@ -77,7 +77,7 @@ function BasicModal({ handleClose, open }) {
 
             <Grid item xs={12}>
               <Button variant="outlined" color="success" type="submit">
-                Ajouter
+                Modifier
               </Button>
             </Grid>
           </Grid>

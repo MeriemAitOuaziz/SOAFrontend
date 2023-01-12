@@ -1,12 +1,13 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import { useEffect, useState } from "react";
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import MissionTable from './Components/MissionTable';
 import RemboursementTable from "./Components/RemboursementTable";
-import { Button, TextField, IconButton } from "@mui/material";
+import {  TextField, IconButton } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import AddRemboursementModal from "./Components/AddRemboursementModal";
 import BasicModalDialog from "./Components/AddRemModal";
@@ -65,7 +66,7 @@ export default function App() {
   useEffect(() => {
     fetchMissions(setMissions);
   }, [missions]);
- const handleClose =()=>{
+ const handleCloseMissionModal =()=>{
   setshowModal(false);
  }
   const handleChange = (event, newValue) => {
@@ -175,7 +176,7 @@ export default function App() {
         <RemboursementTable />
       </TabPanel>
 
-      <NewMissionModel open={showModal} handleClose={handleClose}/>
+      <NewMissionModel open={showModal} handleClose={handleCloseMissionModal}/>
     </Box>
   );
 }
