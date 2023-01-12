@@ -12,6 +12,7 @@ const rows = [
     budgetAttrib: 900,
     remboursementAttrib: 800,
     isValid: true,
+    validPrice: true
   },
   {
     id: 2,
@@ -22,13 +23,13 @@ const rows = [
     budgetAttrib: 900,
     remboursementAttrib: 800,
     isValid: false,
+    validPrice: true
   },
 ];
 
 const columns = [
   { field: "ID", headerName: "Remboursement ID", width: 150 },
   { field: "demandeur", headerName: "Demandeur", width: 150 },
-  { field: "validPrice", headerName: "Prix Valide", width: 150 },
   { field: "ordre", headerName: "Ordre", width: 150 },
   { field: "budgetAttrib", headerName: "Budget Attribué", width: 200 },
   {
@@ -50,6 +51,32 @@ const columns = [
           borderRadius="4px"
         >
           {isValid ? (
+            <Button variant="contained" color="success" disabled fullWidth>
+              Validé
+            </Button>
+          ) : (
+            <Button variant="contained" color="success" fullWidth>
+              "Valider"
+            </Button>
+          )}
+        </Box>
+      );
+    },
+  },
+  {
+    field: "validPrice",
+    headerName: "Validation du prix",
+    renderCell: ({ row: { validPrice } }) => {
+      return (
+        <Box
+          width="60%"
+          m="0 auto"
+          p="5px"
+          display="flex"
+          justifyContent="center"
+          borderRadius="4px"
+        >
+          {validPrice ? (
             <Button variant="contained" color="success" disabled fullWidth>
               Validé
             </Button>
