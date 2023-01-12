@@ -1,5 +1,5 @@
 import { DataGrid } from "@mui/x-data-grid";
-import { Box, Typography, useTheme, Button } from "@mui/material";
+import { Box, Typography, useTheme, Button, IconButton, Grid } from "@mui/material";
 import { fetchRemboursements } from "../Api/Remboursement";
 import * as React from "react";
 import { useEffect } from "react";
@@ -7,6 +7,7 @@ import { validateRemboursement } from "../Api/Remboursement";
 import { validateRemboursementPrice } from "../Api/Remboursement";
 import OrderModalDialog from "./ChangeOrdreRem";
 import PriceModalDialog from "./PriceValidationModal";
+import EditIcon from '@mui/icons-material/Edit';
 
 const rows = [
   {
@@ -62,23 +63,31 @@ export default function RemboursementTable(props) {
             m="0 auto"
             p="5px"
             display="flex"
-            justifyContent="center"
+            justifyContent="space-between"
             justifyItems="center"
             borderRadius="4px"
             flexDirection="row"
+            
           >
-            <Typography m="20px">{ordre}</Typography>
-            <Button
+            <Grid container direction="row" spacing={1}>
+              <Grid item xs={8}>
+            <Typography m="20px">{ordre? ordre : "NA"
+            }</Typography>
+            </Grid>
+            <Grid item xs={4}>
+            <IconButton
               variant="outlined"
-              size="small"
+              style={{padding : "20px" }}
               fullWidth
               onClick={() => {
                 setOpen(true);
               }}
             >
-              Modifier
-            </Button>
+            <EditIcon></EditIcon>
+            </IconButton>
+            </Grid>
             <OrderModalDialog open={open} handleClose={handleClose} id={id} />
+            </Grid>
           </Box>
         );
       },
