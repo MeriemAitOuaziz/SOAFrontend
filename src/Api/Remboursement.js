@@ -1,4 +1,5 @@
 import configData from "../config.json";
+import axios from "axios";
 
 const Remboursement_Api_Url_S1 = configData.SERVICE1_URL + "remboursements";
 const Remboursement_Api_Url_S2 = configData.SERVICE2_URL + "remboursements";
@@ -19,7 +20,10 @@ const fetchRemboursements = (setRemboursements) => {
 };
 
 //fetches Remboursements by demandeur
-const fetchRemboursementsByDemandeur = (setRemboursementsByDemandeur, demandeur) => {
+const fetchRemboursementsByDemandeur = (
+  setRemboursementsByDemandeur,
+  demandeur
+) => {
   axios.get(`${Remboursement_Api_Url_S1}` + "/" + `${demandeur}`).then(
     (res) => {
       console.log(res.data);
