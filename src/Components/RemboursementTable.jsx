@@ -4,6 +4,7 @@ import { colors } from 'debug/src/browser';
 
 const rows = [
     {id:1,ID:1,demandeur:"Ahmed",validPrice:500,ordre: 1, budgetAttrib:900,remboursementAttrib: 800, isValid: true},
+    {id:2,ID:1,demandeur:"Ahmed",validPrice:500,ordre: 1, budgetAttrib:900,remboursementAttrib: 800, isValid: false}
   ];
   
 
@@ -34,7 +35,7 @@ const rows = [
           >
            
             <Typography  sx={{ ml: "5px" }}>
-              {isValid} whyyyy
+              {isValid} 
             </Typography>
           </Box>
         );

@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import MissionTable from './Components/MissionTable';
 import RemboursementTable from './Components/RemboursementTable'
+import { Button } from "@mui/material";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -59,7 +60,25 @@ export default function App() {
         <MissionTable/>
       </TabPanel>
       <TabPanel value={value} index={1}>
+        
+        <Box display="flex" flexDirection="row" 
+          justifyContent="space-between"
+          alignItems="center"
+          width="100%">
         Remboursements
+        <Button
+              variant="contained"
+              sx={{ m: "10px", backgroundColor: "#70d8bd" }}
+            >
+              <Typography variant="h7">
+                Ajouter Remboursement
+              </Typography>
+            </Button>
+
+        </Box>
+
+        
+
         <RemboursementTable />
       </TabPanel>
     
